@@ -1,0 +1,38 @@
+{
+  "name": "tiger-home-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "start-dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/ChasingTheRate/tiger-home-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/ChasingTheRate/tiger-home-server#readme",
+  "dependencies": {
+    "ajv": "^6.4.0",
+    "axios": "^0.18.0",
+    "base64id": "^1.0.0",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "knex": "^0.14.5",
+    "noble": "^1.9.1",
+    "pg": "^7.4.1",
+    "qs": "^6.5.2",
+    "rpi-gpio": "^0.9.1",
+    "socketio": "^1.0.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "debug": "^3.1.0",
+    "nodemon": "^1.17.3"
+  }
+}
