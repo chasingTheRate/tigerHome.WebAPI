@@ -24,15 +24,13 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "knex": "^0.14.5",
-    "noble": "^1.9.1",
     "pg": "^7.4.1",
     "qs": "^6.5.2",
     "rpi-gpio": "^0.9.1",
-    "socketio": "^1.0.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
     "debug": "^3.1.0",
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.18.6"
   }
 }
