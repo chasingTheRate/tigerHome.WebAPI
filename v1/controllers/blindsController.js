@@ -3,11 +3,8 @@ const axios = require('axios');
 const qs = require('qs');
 const blindsDB = require('../db/blindsDB');
 const Blind = require('../model/blind');
-const Pin = require('../model/pin');
 
 const TIMEOUT = 25000;
-const OPEN_VALUE = 120;
-const CLOSED_VALUE = 0;
 const DELAY = 30;
 
 

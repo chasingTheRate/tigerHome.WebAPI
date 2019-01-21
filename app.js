@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors');
 
 const routes = require(`./${ config.version }/routes`);
+const port = config.port;
 
 const app = express();
 
@@ -12,10 +13,4 @@ app.use(cors());
 app.use('/blinds', routes.blindRoutes);
 app.use('/', routes.catchAllRoutes);
 
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-
-const sockets = require(`./${ config.version }/sockets`)(io);
-
-console.log(`App listening on port: ${ config.port }`);
-server.listen(config.port);
+app.listen(port, () => console.log(`App listening on port ${port}!`))
