@@ -13,6 +13,7 @@ const baseUrl = '/api'
 app.use(bodyParser.json());
 app.use(cors());
 app.use(`${baseUrl}/v1/blinds`, routesV1.blindRoutes);
+app.use(`${baseUrl}/v1/healthCheck`, routesV1.healthCheckRoutes);
 app.use(`${baseUrl}/v1/`, routesV1.catchAllRoutes);
 
 app.listen(port, () => console.log(`App listening on port ${port}!`))
