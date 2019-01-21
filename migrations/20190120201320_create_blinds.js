@@ -14,6 +14,8 @@ exports.up = (knex, Promise) => {
         table.string('roomId').nullable();
         table.string('blindState').nullable();
         table.integer('port').nullable();
+        table.integer('positionLimitOpen').nullable();
+        table.integer('positionLimitClosed').nullable();
       })
       .then(() => {
         return knex(blindsTableName).insert(
@@ -25,6 +27,8 @@ exports.up = (knex, Promise) => {
             roomId: null,
             blindState: 'closed',
             port: 0,
+            positionLimitOpen: 90,
+            positionLimitClosed: 360,
           }
         )
       })

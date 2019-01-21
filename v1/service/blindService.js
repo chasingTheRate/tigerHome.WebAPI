@@ -12,7 +12,7 @@ const getBlinds = (req, res) => {
 
 const addBlind = (req, res) => {
   debug('addBlind');
-  const blindData = req.body.data;
+  const blindData = req.body;
   const valid = schema.validate(schema.blindSchema, blindData);
   if (!valid) {
     return res.sendStatus(400);
@@ -29,7 +29,7 @@ const addBlind = (req, res) => {
 
 const removeBlind = (req, res) => {
   debug('removeBlind');
-  const id = req.body.data.blindid;
+  const id = req.body.id;
   if (!id) {
     return res.sendStatus(400);
   }
@@ -50,10 +50,10 @@ const updateBlindWithId = (req, res) => {
 
 const openBlind = (req, res) => {
   debug('openBlind');
-  if (!req.body.data) {
+  if (!req.body.id) {
     return res.sendStatus(400);
   }
-  const id = req.body.data.blindid;
+  const id = req.body.id;
 
   if (!id) {
     return res.sendStatus(400);
@@ -71,10 +71,10 @@ const openBlind = (req, res) => {
 
 const closeBlind = (req, res) => {
   debug('closeBlind');
-  if (!req.body.data) {
+  if (!req.body.id) {
     return res.sendStatus(400);
   }
-  const id = req.body.data.blindid;
+  const id = req.body.id;
   
   if (!id) {
     return res.sendStatus(400);
@@ -93,12 +93,9 @@ const closeBlind = (req, res) => {
 const setPosition = (req, res) => {
   debug('setPosition');
 
-  if (!req.body.data) {
-    return res.sendStatus(400);
-  }
-  const { blindid, targetPosition }  = req.body.data;
+  const { id, targetPosition }  = req.body;
   
-  if (!blindid || !targetPosition) {
+  if (!id || !targetPosition) {
     return res.sendStatus(400);
   }
   
@@ -115,16 +112,13 @@ const setPosition = (req, res) => {
 const setOpenAngleLimit = (req, res) => {
   debug('setOpenAngleLimit');
 
-  if (!req.body.data) {
-    return res.sendStatus(400);
-  }
-  const { blindId, angleLimitOpen }  = req.body.data;
+  const { id, angleLimitOpen }  = req.body;
   
-  if (!blindId || !angleLimitOpen) {
+  if (!id || !angleLimitOpen) {
     return res.sendStatus(400);
   }
   
-  BlindsController.setOpenAngleLimit(blindId, angleLimitOpen)
+  BlindsController.setOpenAngleLimit(id, angleLimitOpen)
   .then((results) => {
     res.sendStatus(200);
   })
@@ -137,16 +131,13 @@ const setOpenAngleLimit = (req, res) => {
 const setClosedAngleLimit = (req, res) => {
   debug('setClosedAngleLimit');
 
-  if (!req.body.data) {
-    return res.sendStatus(400);
-  }
-  const { blindId, angleLimitClosed }  = req.body.data;
+  const { id, angleLimitClosed }  = req.body;
   
-  if (!blindId || !angleLimitClosed) {
+  if (!id || !angleLimitClosed) {
     return res.sendStatus(400);
   }
   
-  BlindsController.setClosedAngleLimit(blindId, angleLimitClosed)
+  BlindsController.setClosedAngleLimit(id, angleLimitClosed)
   .then((results) => {
     res.sendStatus(200);
   })
@@ -159,16 +150,10 @@ const setClosedAngleLimit = (req, res) => {
 const status = (req, res) => {
   debug('status');
 
-  if (!req.body.data) {
+  if (!req.query.id) {
     return res.sendStatus(400);
   }
-  const { blindId }  = req.body.data;
-  
-  if (!blindId) {
-    return res.sendStatus(400);
-  }
-
-  BlindsController.status(blindId)
+  BlindsController.status(req.query.id)
   .then((results) => {
     res.status(200).json(results);
   });

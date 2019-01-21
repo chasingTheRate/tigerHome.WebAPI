@@ -50,12 +50,12 @@ class BlindsController {
     return blindsDB.getBlindWithID(id)
     .then((blind) => {
       console.log(blind);
-      const { ip_address, position_limit_open, position_current, port } = blind[0];
-      position = position_limit_open;
+      const { ipAddress, positionLimitOpen, currentPosition, port } = blind[0];
+      position = positionLimitOpen;
       const params = {
-        'currentPosition': position_current,
-        'targetPosition': position_limit_open,
-        'port': port,
+        currentPosition,
+        'targetPosition': positionLimitOpen,
+        port,
         'delay': 30
       };
       const options = {
@@ -73,12 +73,11 @@ class BlindsController {
     let position = 0;
     return blindsDB.getBlindWithID(id)
     .then((blind) => {
-      const { ip_address, position_limit_closed, position_current, port } = blind[0];
-      position = position_limit_closed;
+      const { ipAddress, positionLimitClosed, currentPosition, port } = blind[0];
       const params = {
-        'currentPosition': position_current,
-        'targetPosition': position_limit_closed,
-        'port': port,
+        currentPosition,
+        'targetPosition': positionLimitClosed,
+        port,
         'delay': 30
       };
       const options = {
@@ -107,54 +106,53 @@ class BlindsController {
     return blindsDB.updateBlindState(id, state, position)
   }
 
-  static setPosition(blindid, targetPosition) {
-    debug(`setPosition - id: ${ blindid }, targetPosition: ${ targetPosition }`);
-    return blindsDB.getBlindWithID(blindid)
+  static setPosition(id, targetPosition) {
+    debug(`setPosition - id: ${ id }, targetPosition: ${ targetPosition }`);
+    return blindsDB.getBlindWithID(id)
     .then((blind) => {
       return BlindsController.setPositionWithBlind(blind, targetPosition);
     })
   }
 
   static setPositionWithBlind(blind, targetPosition) {
-    const { ipaddress, currentPosition, port } = blind[0];
+    const { ipAddress, currentPosition, port } = blind[0];
     const params = {
-      'currentPosition': currentPosition,
+      currentPosition,
       'targetPosition': targetPosition,
-      'port': port,
+      port,
       'delay': DELAY
     };
-    console.log(params);
     const options = {
       timeout: TIMEOUT
     };
     return axios.post(`http://${ ipaddress }:80/setPositionWithPort`, qs.stringify(params), options);
   }
 
-  static setOpenAngleLimit(blindid, targetPosition) {
-    debug(`setOpenAnglePosition - id: ${ blindid }, targetPosition: ${ targetPosition }`);
-    return blindsDB.getBlindWithID(blindid)
+  static setOpenAngleLimit(id, targetPosition) {
+    debug(`setOpenAnglePosition - id: ${ id }, targetPosition: ${ targetPosition }`);
+    return blindsDB.getBlindWithID(id)
     .then((blind) => {
       return BlindsController.setPositionWithBlind(blind, targetPosition);
     })
     .then((response) => {
-      return blindsDB.setOpenAngleLimit(blindid, targetPosition)
+      return blindsDB.setOpenAngleLimit(id, targetPosition)
     })
   }
 
-  static setClosedAngleLimit(blindid, targetPosition) {
-    debug(`setOpenAnglePosition - id: ${ blindid }, targetPosition: ${ targetPosition }`);
-    return blindsDB.getBlindWithID(blindid)
+  static setClosedAngleLimit(id, targetPosition) {
+    debug(`setOpenAnglePosition - id: ${ id }, targetPosition: ${ targetPosition }`);
+    return blindsDB.getBlindWithID(id)
     .then((blind) => {
       return BlindsController.setPositionWithBlind(blind, targetPosition);
     })
     .then((response) => {
-      return blindsDB.setClosedAngleLimit(blindid, targetPosition)
+      return blindsDB.setClosedAngleLimit(id, targetPosition)
     })
   }
 
-  static status(blindid) {
-    debug(`status - id: ${ blindid }`);
-    return blindsDB.status(blindid);
+  static status(id) {
+    debug(`status - id: ${ id }`);
+    return blindsDB.status(id);
   }
 
   static peripheralStatus() {

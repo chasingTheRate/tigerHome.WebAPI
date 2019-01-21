@@ -6,9 +6,8 @@ router.get('/status', blindService.status);
 router.get('/peripheralStatus', blindService.peripheralStatus);
 router.get('/', blindService.getBlinds);
 
-router.post('/status', blindService.status);
-router.post('/addBlind', blindService.addBlind);
-router.post('/removeBlind', blindService.removeBlind);
+router.post('/add', blindService.addBlind);
+router.post('/remove', blindService.removeBlind);
 router.post('/openBlind', blindService.openBlind);
 router.post('/closeBlind', blindService.closeBlind);
 router.post('/setPosition', blindService.setPosition);
