@@ -11,7 +11,8 @@ exports.up = (knex, Promise) => {
         table.string('ipAddress').nullable();
         table.string('name').nullable();
         table.integer('currentPosition').nullable();
-        table.string('roomId').nullable();
+        table.uuid('roomId').nullable();
+        table.uuid('peripheralId').nullable();
         table.string('blindState').nullable();
         table.integer('port').nullable();
         table.integer('positionLimitOpen').nullable();

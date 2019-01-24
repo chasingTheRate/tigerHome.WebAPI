@@ -7,6 +7,9 @@ const getBlinds = (req, res) => {
   BlindsController.getBlinds()
   .then((results) => {
     res.status(200).json(results);
+  })
+  .catch((error) => {
+    console.error(error);
   });
 }
 
