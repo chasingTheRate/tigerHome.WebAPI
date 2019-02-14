@@ -26,9 +26,9 @@ const getAllBlindRecords = () => {
     .from('blinds');
 }
 
-const getBlindWithID = (id) => {
+const getBlindWithId = (id) => {
   debug(`getBlindWithID - id: ${ id }`);
-  return knex.select('*').from('blinds').where({ blind_id: id });
+  return knex.select('*').from('blinds').where({ id });
 }
 
 const updateBlindState = (id, state, position) => {
@@ -47,7 +47,7 @@ const addBlind = (data) => {
     port: port, 
     currentPosition = 0,
     positionLimitOpen = 90,
-    positionLimitClosed = 0
+    positionLimitClosed = 200
   } = data;
 
   // const blindid = uuid(); 
@@ -87,7 +87,7 @@ const status = (id) => {
 
 module.exports = {
   getAllBlindRecords,
-  getBlindWithID,
+  getBlindWithId,
   updateBlindState,
   addBlind,
   removeBlindWithID,

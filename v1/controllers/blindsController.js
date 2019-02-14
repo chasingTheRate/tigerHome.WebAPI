@@ -47,7 +47,7 @@ class BlindsController {
   static openBlind(id) {
     debug(`openBlind - id: ${ id }`);
     let position = 0;
-    return blindsDB.getBlindWithID(id)
+    return blindsDB.getBlindWithId(id)
     .then((blind) => {
       console.log(blind);
       const { ipAddress, positionLimitOpen, currentPosition, port } = blind[0];
@@ -61,7 +61,7 @@ class BlindsController {
       const options = {
         timeout: TIMEOUT
       };
-      return axios.post(`http://${ ip_address }:80/setPositionForServoAtPort`, qs.stringify(params), options);
+      return axios.post(`http://${ ipAddress }:80/setPositionForServoAtPort`, qs.stringify(params), options);
     })
     .then((response) => {
       return BlindsController.updateBlindState(id, 'open', position);
@@ -71,7 +71,7 @@ class BlindsController {
   static closeBlind(id) {
     debug(`closeBlind - id: ${ id }`);
     let position = 0;
-    return blindsDB.getBlindWithID(id)
+    return blindsDB.getBlindWithId(id)
     .then((blind) => {
       const { ipAddress, positionLimitClosed, currentPosition, port } = blind[0];
       const params = {
@@ -83,7 +83,7 @@ class BlindsController {
       const options = {
         timeout: TIMEOUT
       };
-      return axios.post(`http://${ ip_address }:80/setPositionForServoAtPort`, qs.stringify(params), options);
+      return axios.post(`http://${ ipAddress }:80/setPositionForServoAtPort`, qs.stringify(params), options);
     })
     .then((response) => {
       return BlindsController.updateBlindState(id, 'closed', position);

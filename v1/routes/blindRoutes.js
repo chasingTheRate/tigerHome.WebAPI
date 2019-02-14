@@ -8,8 +8,8 @@ router.get('/', blindService.getBlinds);
 
 router.post('/add', blindService.addBlind);
 router.post('/remove', blindService.removeBlind);
-router.post('/openBlind', blindService.openBlind);
-router.post('/closeBlind', blindService.closeBlind);
+router.post('/:blindId/openBlind', blindService.openBlind);
+router.post('/:blindId/closeBlind', blindService.closeBlind);
 router.post('/setPosition', blindService.setPosition);
 router.post('/setOpenAngleLimit', blindService.setOpenAngleLimit);
 router.post('/setClosedAngleLimit', blindService.setClosedAngleLimit);

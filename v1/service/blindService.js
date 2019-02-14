@@ -2,6 +2,13 @@ const debug = require('debug')('blindService');
 const BlindsController = require('../controllers/blindsController');
 const schema = require('../schema');
 
+const isValidBodyParam = (param) => {
+  if (!param) {
+    return false
+  }
+  return true
+}
+
 const getBlinds = (req, res) => {
   debug('getBlinds');
   BlindsController.getBlinds()
@@ -53,17 +60,11 @@ const updateBlindWithId = (req, res) => {
 
 const openBlind = (req, res) => {
   debug('openBlind');
-  if (!req.body.id) {
-    return res.sendStatus(400);
-  }
-  const id = req.body.id;
 
-  if (!id) {
-    return res.sendStatus(400);
-  }
-  
+  const id = isValidBodyParam(req.params.blindId) ? req.params.blindId : res.sendStatus(400);
+
   BlindsController.openBlind(id)
-  .then((results) => {
+  .then(() => {
     res.sendStatus(200);
   })
   .catch((err) => {
@@ -74,17 +75,11 @@ const openBlind = (req, res) => {
 
 const closeBlind = (req, res) => {
   debug('closeBlind');
-  if (!req.body.id) {
-    return res.sendStatus(400);
-  }
-  const id = req.body.id;
-  
-  if (!id) {
-    return res.sendStatus(400);
-  }
-  
+
+  const id = isValidBodyParam(req.params.blindId) ? req.params.blindId : res.sendStatus(400);
+
   BlindsController.closeBlind(id)
-  .then((results) => {
+  .then(() => {
     res.sendStatus(200);
   })
   .catch((err) => {
