@@ -28,8 +28,8 @@ installNmpPackages(){
   npm install
 }
 
-copyPlistToLaunchAgents(){
-  cp $@ ~/Library/LaunchAgents
+copyPlistToGlobalDaemons(){
+  cp $@ /Library/LaunchDaemons
 }
 
 enableService(){
@@ -52,5 +52,5 @@ PROJECT_NAME=`basename $PWD`
 PLIST_NAME=$(getPlistName $PROJECT_NAME)
 
 installNmpPackages
-copyPlistToLaunchAgents $PLIST_NAME
+copyPlistToGlobalDaemons $PLIST_NAME
 enableService $PLIST_NAME
