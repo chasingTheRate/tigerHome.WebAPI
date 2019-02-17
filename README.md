@@ -1,15 +1,14 @@
-# tiger-home-server
+# Tiger Home WebAPI
 
-Installation
+##  Installation
 
-npm install
+1.  `npm install`
 
-Create plist
-
-Update plist
+2.  Create plist
 
     Sample plist:
 
+    ```
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
@@ -44,8 +43,9 @@ Update plist
             <string>/PATH-TO-STDOUT/stdout.log</string>
       </dict>
     </plist>
+    ```
 
-Create .env file
+3.  Create .env file
 
     Add ENVIRONMENT VARIABLES:
 
@@ -53,14 +53,6 @@ Create .env file
         - DB_USERNAME
         - DB_PASSWORD
 
-Install Knex
+4.  Run Shell Scripts
 
-npm i knex -g
-
-Migration
-
-knex migration:latest
-
-Run Shell Scripts
-
-- sh ./install.sh
+    `sh ./install.sh`
