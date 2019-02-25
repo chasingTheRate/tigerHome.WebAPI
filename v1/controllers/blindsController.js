@@ -1,12 +1,14 @@
 const debug = require('debug')('blindsController');
 const axios = require('axios');
 const qs = require('qs');
+const config = require('../../config');
 const blindsDB = require('../db/blindsDB');
 const Blind = require('../model/blind');
+const environmentType = require('../model/environmentTypes')
 
 const TIMEOUT = 25000;
 const DELAY = 30;
-
+const env = config.env;
 
 const getUniqueIpAddresses = (blinds) => {
   return [...new Set(blinds.map(blind => blind.ipAddress))];
@@ -44,6 +46,17 @@ class BlindsController {
     return blindsDB.removeBlindWithID(id);
   }
 
+  static setBlindPositionAtIpAddress(ipAddress, params){
+    const options = {
+      timeout: TIMEOUT
+    };
+    if (env === environmentType.production) {
+      return axios.post(`http://${ ipAddress }:80/setPositionForServoAtPort`, qs.stringify(params), options);
+    } else {
+      return Promise.resolve();
+    }
+  }
+
   static openBlind(id) {
     debug(`openBlind - id: ${ id }`);
     let position = 0;
@@ -58,12 +71,9 @@ class BlindsController {
         port,
         'delay': 30
       };
-      const options = {
-        timeout: TIMEOUT
-      };
-      return axios.post(`http://${ ipAddress }:80/setPositionForServoAtPort`, qs.stringify(params), options);
+      return BlindsController.setBlindPositionAtIpAddress(ipAddress, params);
     })
-    .then((response) => {
+    .then(() => {
       return BlindsController.updateBlindState(id, 'open', position);
     })
   }
@@ -80,12 +90,9 @@ class BlindsController {
         port,
         'delay': 30
       };
-      const options = {
-        timeout: TIMEOUT
-      };
-      return axios.post(`http://${ ipAddress }:80/setPositionForServoAtPort`, qs.stringify(params), options);
+      return BlindsController.setBlindPositionAtIpAddress(ipAddress, params);
     })
-    .then((response) => {
+    .then(() => {
       return BlindsController.updateBlindState(id, 'closed', position);
     })
   }
