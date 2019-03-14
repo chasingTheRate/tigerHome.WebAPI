@@ -157,6 +157,18 @@ const status = (req, res) => {
   });
 }
 
+const currentPosition = (req, res) => {
+  debug('status');
+
+  if (!req.query.id) {
+    return res.sendStatus(400);
+  }
+  BlindsController.currentPosition(req.query.id)
+  .then((results) => {
+    res.status(200).json(results);
+  });
+}
+
 const peripheralStatus = (req, res) => {
   debug('peripheralStatus');
 
@@ -181,4 +193,5 @@ module.exports = {
   setOpenAngleLimit,
   status,
   updateBlindWithId,
+  currentPosition,
 }

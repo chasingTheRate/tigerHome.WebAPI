@@ -3,6 +3,7 @@ const router = express.Router();
 const blindService = require('../service/blindService'); 
 
 router.get('/status', blindService.status);
+router.get('/currentPosition', blindService.currentPosition);
 router.get('/peripheralStatus', blindService.peripheralStatus);
 router.get('/', blindService.getBlinds);
 

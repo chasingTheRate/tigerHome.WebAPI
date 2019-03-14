@@ -162,6 +162,11 @@ class BlindsController {
     return blindsDB.status(id);
   }
 
+  static currentPosition(id) {
+    debug(`currentPosition - id: ${ id }`);
+    return blindsDB.currentPosition(id);
+  }
+
   static peripheralStatus() {
     debug(`peripheralStatus`);
     return blindsDB.getAllBlindRecords()
