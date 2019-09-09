@@ -4,10 +4,10 @@ const uuid = require('uuid');
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : config[config.env].dbHost,
-    user : config[config.env].dbUsername,
-    password : config[config.env].dbPassword,
-    database : config[config.env].dbDatabaseName,
+    host : config.dbHost,
+    user : config.dbUsername,
+    password : config.dbPassword,
+    database : config.dbDatabaseName,
   },
   acquireConnectionTimeout: 10000
 });
