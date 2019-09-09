@@ -2,6 +2,7 @@ module.exports = {
   version: 'v1',
   port: process.env.PORT || 8083,
   env: process.env.NODE_ENV || 'development',
+  rabbitMqUrl: process.env.RABBIT_MQ_URL,
   development:
    {
      dbHost: process.env.DB_HOST,

@@ -12,6 +12,10 @@ const knex = require('knex')({
   acquireConnectionTimeout: 10000
 });
 
+const getRecords = (fields, table) => {
+  return knex.select(...fields).from(table);
+}
+
 const getAllBlindRecords = () => {
   return knex.select(
     'id',
@@ -91,6 +95,7 @@ const currentPosition = (id) => {
 }
 
 module.exports = {
+  getRecords,
   getAllBlindRecords,
   getBlindWithId,
   updateBlindState,
