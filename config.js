@@ -2,18 +2,9 @@ module.exports = {
   version: 'v1',
   port: process.env.PORT || 8083,
   env: process.env.NODE_ENV || 'development',
-  development:
-   {
-     dbHost: process.env.DB_HOST,
-     dbUsername: process.env.DB_USERNAME,
-     dbPassword: process.env.DB_PASSWORD,
-     dbDatabaseName: process.env.DB_DATABASE,
-   },
-   production:
-   {
-     dbHost: process.env.DB_HOST,
-     dbUsername: process.env.DB_USERNAME,
-     dbPassword: process.env.DB_PASSWORD,
-     dbDatabaseName: process.env.DB_DATABASE,
-   }
+  rabbitMqUrl: process.env.RABBIT_MQ_URL,
+  dbHost: process.env.DB_HOST,
+  dbUsername: process.env.DB_USERNAME,
+  dbPassword: process.env.DB_PASSWORD,
+  dbDatabaseName: process.env.DB_DATABASE,
 }

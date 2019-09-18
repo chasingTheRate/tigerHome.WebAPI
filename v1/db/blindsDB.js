@@ -4,13 +4,17 @@ const uuid = require('uuid');
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : config[config.env].dbHost,
-    user : config[config.env].dbUsername,
-    password : config[config.env].dbPassword,
-    database : config[config.env].dbDatabaseName,
+    host : config.dbHost,
+    user : config.dbUsername,
+    password : config.dbPassword,
+    database : config.dbDatabaseName,
   },
   acquireConnectionTimeout: 10000
 });
+
+const getRecords = (fields, table) => {
+  return knex.select(...fields).from(table);
+}
 
 const getAllBlindRecords = () => {
   return knex.select(
@@ -91,6 +95,7 @@ const currentPosition = (id) => {
 }
 
 module.exports = {
+  getRecords,
   getAllBlindRecords,
   getBlindWithId,
   updateBlindState,

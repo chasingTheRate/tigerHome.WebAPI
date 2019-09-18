@@ -6,7 +6,7 @@ const ajv = Ajv({allErrors: true});
 
 const validate = (schema, data) => {
   debug('validate');
-  const valid = ajv.validate(blindSchema, data)
+  const valid = ajv.validate(schema, data)
   if (!valid) {
     console.log(ajv.errors);
   }
@@ -14,6 +14,5 @@ const validate = (schema, data) => {
 }
 
 module.exports = {
-  blindSchema,
   validate
 }
