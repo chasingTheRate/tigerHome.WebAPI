@@ -6,8 +6,16 @@ const EXCHANGE = "TIGER_EXCHANGE";
 
 let ch = null;
 
-amqp.connect(CONN_URL, function (err, conn) {
-   conn.createChannel(function (err, channel) {
+amqp.connect(CONN_URL, (err1, conn) => {
+
+   if(err1) {
+      throw err1
+   }
+
+   conn.createChannel((err2, channel) => {
+      if (err2) {
+         throw err2;
+      }
       ch = channel;
       ch.assertExchange(EXCHANGE, 'fanout', {durable: false})
    });
