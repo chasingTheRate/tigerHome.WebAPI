@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 COPY wait-for-it.sh ./
-RUN chmod +x /wait-for-it.sh
+RUN chmod +x ./wait-for-it.sh
 
 RUN npm install
 # If you are building your code for production
