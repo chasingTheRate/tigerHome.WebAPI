@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "babel-node app.js",
+    "start": "NODE_ENV=production babel-node app.js",
+    "start:dev": "NODE_ENV=development DEBUG=* nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src --out-dir dist",
     "serve": "node dist/server.js"
   },
