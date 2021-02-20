@@ -4,6 +4,7 @@ const blindService = require('../service/blindService');
 
 router.get('/status', blindService.status);
 router.get('/currentPosition', blindService.currentPosition);
+router.get('/targetPosition', blindService.targetPosition);
 router.get('/peripheralStatus', blindService.peripheralStatus);
 router.get('/', blindService.getBlinds);
 
@@ -14,5 +15,7 @@ router.post('/:blindId/closeBlind', blindService.closeBlind);
 router.post('/setPosition', blindService.setPosition);
 router.post('/setOpenAngleLimit', blindService.setOpenAngleLimit);
 router.post('/setClosedAngleLimit', blindService.setClosedAngleLimit);
+
+router.patch('/targetPosition', blindService.setTargetPosition);
 
 module.exports = router;

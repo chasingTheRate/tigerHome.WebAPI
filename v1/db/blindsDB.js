@@ -94,6 +94,17 @@ const currentPosition = (id) => {
   return knex.select('currentPosition').from('blinds').where({ id });
 }
 
+const targetPosition = (id) => {
+  debug(`Target Position - id: ${ id }`);
+  return knex.select('targetposition').from('blinds').where({ id });
+}
+
+const setTargetPosition = (options) => {
+  debug(`Target Position - id: ${ id }`);
+  const { id, targetPosition } = options;
+  return knex('blinds').where({ id }).update({ targetposition: targetPosition })
+}
+
 module.exports = {
   getRecords,
   getAllBlindRecords,
@@ -105,4 +116,6 @@ module.exports = {
   setClosedAngleLimit,
   status,
   currentPosition,
+  targetPosition,
+  setTargetPosition
 };

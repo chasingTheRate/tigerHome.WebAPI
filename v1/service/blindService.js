@@ -158,7 +158,7 @@ const status = (req, res) => {
 }
 
 const currentPosition = (req, res) => {
-  debug('status');
+  debug('curretnPosition');
 
   if (!req.query.id) {
     return res.sendStatus(400);
@@ -167,6 +167,17 @@ const currentPosition = (req, res) => {
   .then((results) => {
     res.status(200).json(results);
   });
+}
+
+const targetPosition = async (req, res) => {
+  debug('targetPosition');
+
+  if (!req.query.id) {
+    return res.sendStatus(400);
+  }
+
+  const results = await BlindsController.targetPosition(req.query.id)
+  return res.status(200).json(results);
 }
 
 const peripheralStatus = (req, res) => {
@@ -179,6 +190,19 @@ const peripheralStatus = (req, res) => {
   .catch((error) => {
     res.sendStatus(500);
   });
+}
+
+const setTargetPosition = async (req, res) => {
+  debug('Set targetPosition');
+
+  if (!req.query.id || !req.query.targetPosition) {
+    return res.sendStatus(400);
+  }
+
+  const { id, targetPosition } = req.query;
+
+  const results = await BlindsController.setTargetPosition({id, targetPosition})
+  return res.status(200).json(results);
 }
 
 module.exports = {
@@ -194,4 +218,6 @@ module.exports = {
   status,
   updateBlindWithId,
   currentPosition,
+  targetPosition,
+  setTargetPosition,
 }

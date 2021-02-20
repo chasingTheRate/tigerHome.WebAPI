@@ -57,44 +57,55 @@ class BlindsController {
     }
   }
 
-  static openBlind(id) {
+  static async openBlind(id) {
     debug(`openBlind - id: ${ id }`);
     let position = 0;
-    return blindsDB.getBlindWithId(id)
-    .then((blind) => {
-      console.log(blind);
-      const { ipAddress, positionLimitOpen, currentPosition, port } = blind[0];
-      position = positionLimitOpen;
-      const params = {
-        currentPosition,
-        'targetPosition': positionLimitOpen,
-        port,
-        'delay': 30
-      };
-      return BlindsController.setBlindPositionAtIpAddress(ipAddress, params);
-    })
-    .then(() => {
-      return BlindsController.updateBlindState(id, 'open', position);
-    })
+    const blind = await blindsDB.getBlindWithId(id);
+
+    if (!blind) {
+      return;
+    }
+
+    const { ipAddress, positionLimitOpen, currentPosition, port } = blind[0];
+    position = positionLimitOpen;
+    const params = {
+      currentPosition,
+      'targetPosition': positionLimitOpen,
+      port,
+      'delay': 30
+    };
+
+    if (ipAddress) {
+      await BlindsController.setBlindPositionAtIpAddress(ipAddress, params);
+    } 
+
+    await BlindsController.setTargetPosition({ id, targetPosition:  positionLimitOpen });
+    return BlindsController.updateBlindState(id, 'open', position);
   }
 
-  static closeBlind(id) {
+  static async closeBlind(id) {
     debug(`closeBlind - id: ${ id }`);
     let position = 0;
-    return blindsDB.getBlindWithId(id)
-    .then((blind) => {
-      const { ipAddress, positionLimitClosed, currentPosition, port } = blind[0];
-      const params = {
-        currentPosition,
-        'targetPosition': positionLimitClosed,
-        port,
-        'delay': 30
-      };
-      return BlindsController.setBlindPositionAtIpAddress(ipAddress, params);
-    })
-    .then(() => {
-      return BlindsController.updateBlindState(id, 'closed', position);
-    })
+    const blind = await blindsDB.getBlindWithId(id)
+
+    if (!blind) {
+      return;
+    }
+
+    const { ipAddress, positionLimitClosed, currentPosition, port } = blind[0];
+    const params = {
+      currentPosition,
+      'targetPosition': positionLimitClosed,
+      port,
+      'delay': 30
+    };
+
+    if (ipAddress) {
+      await BlindsController.setBlindPositionAtIpAddress(ipAddress, params);
+    }
+
+    await BlindsController.setTargetPosition({ id, targetPosition:  positionLimitClosed });
+    return BlindsController.updateBlindState(id, 'closed', position);
   }
 
   willChangeBlindState(id, targetState) {
@@ -167,6 +178,11 @@ class BlindsController {
     return blindsDB.currentPosition(id);
   }
 
+  static targetPosition(id) {
+    debug(`targetPosition - id: ${ id }`);
+    return blindsDB.targetPosition(id);
+  }
+
   static peripheralStatus() {
     debug(`peripheralStatus`);
     return blindsDB.getAllBlindRecords()
@@ -174,6 +190,13 @@ class BlindsController {
       const ipAddresses = getUniqueIpAddresses(blinds);
       return pingPeripherals(ipAddresses);
     });
+  }
+
+  static setTargetPosition(options) {
+    const { id, targetPosition } = options;
+
+    debug(`set targetPosition - id: ${ id }`);
+    return blindsDB.setTargetPosition({ id, targetPosition });
   }
 }
 
