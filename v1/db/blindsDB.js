@@ -12,6 +12,8 @@ const knex = require('knex')({
   acquireConnectionTimeout: 10000
 });
 
+console.log(config.dbHost);
+
 const getRecords = (fields, table) => {
   return knex.select(...fields).from(table);
 }
