@@ -18,27 +18,27 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/ChasingTheRate/tiger-home-server#readme",
   "dependencies": {
-    "ajv": "^6.4.0",
-    "amqplib": "^0.5.5",
-    "axios": "^0.18.1",
+    "ajv": "^6.12.6",
+    "amqplib": "^0.5.6",
+    "axios": "^0.21.1",
     "base64id": "^1.0.0",
-    "bluebird": "^3.5.1",
+    "bluebird": "^3.7.2",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^6.2.0",
     "express": "^4.16.3",
     "knex": "^0.16.3",
-    "pg": "^7.4.1",
-    "qs": "^6.5.2",
-    "uuid": "^3.3.2"
+    "pg": "^7.18.2",
+    "qs": "^6.9.6",
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
-    "@babel/node": "^7.6.1",
-    "@babel/preset-env": "^7.6.0",
+    "@babel/cli": "^7.12.17",
+    "@babel/core": "^7.12.17",
+    "@babel/node": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
     "babel-core": "^6.26.3",
-    "debug": "^3.1.0",
-    "nodemon": "^1.18.9"
+    "debug": "^3.2.7",
+    "nodemon": "^1.19.4"
   }
 }
