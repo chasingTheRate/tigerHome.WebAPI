@@ -9,6 +9,7 @@ const knex = require('knex')({
     user : config.dbUsername,
     password : config.dbPassword,
     database : config.dbName,
+    port: config.port,
     ssl: { rejectUnauthorized: false }
   },
   acquireConnectionTimeout: 10000
