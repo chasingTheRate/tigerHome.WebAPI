@@ -9,9 +9,8 @@ const client = new Client({
   port: config.dbPort,
 })
 
-client.connect()
-
 const getAllBlindRecords = async () => {
+  client.connect()
   const results = await client.query('SELECT * FROM public.blinds');
   return results.rows;
 }
