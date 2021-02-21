@@ -2,16 +2,6 @@ const debug = require('debug')('blindsDB');
 const config = require('../../config');
 const uuid = require('uuid');
 
-console.log(
-  {
-    host : config.dbHost,
-    user : config.dbUsername,
-    password : config.dbPassword,
-    database : config.dbName,
-    port: config.dbPort,
-  }
-)
-
 const knex = require('knex')({
   client: 'pg',
   connection: {
