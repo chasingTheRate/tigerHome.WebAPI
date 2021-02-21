@@ -1,9 +1,14 @@
 const debug = require('debug')('blindsDB');
-const { dbConnection } = require('../../config');
+const config = require('../../config');
 const uuid = require('uuid');
 const knex = require('knex')({
   client: 'pg',
-  connection: dbConnection,
+  connection: {
+    host : config.dbHost,
+    user : config.dbUsername,
+    password : config.dbPassword,
+    database : config.dbName,
+  },
   acquireConnectionTimeout: 10000
 });
 
