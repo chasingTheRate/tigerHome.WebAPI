@@ -9,7 +9,6 @@ console.log(
     password : config.dbPassword,
     database : config.dbName,
     port: config.dbPort,
-    ssl: { rejectUnauthorized: false }
   }
 )
 
@@ -21,7 +20,6 @@ const knex = require('knex')({
     password : config.dbPassword,
     database : config.dbName,
     port: config.dbPort,
-    ssl: { rejectUnauthorized: false }
   }
 });
 
