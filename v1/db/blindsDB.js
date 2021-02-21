@@ -22,8 +22,7 @@ const knex = require('knex')({
     database : config.dbName,
     port: config.dbPort,
     ssl: { rejectUnauthorized: false }
-  },
-  acquireConnectionTimeout: 10000
+  }
 });
 
 const getRecords = (fields, table) => {
