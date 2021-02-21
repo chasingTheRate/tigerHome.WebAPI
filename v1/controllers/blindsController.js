@@ -3,7 +3,6 @@ const axios = require('axios');
 const qs = require('qs');
 const config = require('../../config');
 const blindsDB = require('../db/blindsDB');
-const blindsDB2 = require('../db/blindsDB2');
 const Blind = require('../model/blind');
 const environmentType = require('../model/environmentTypes')
 
@@ -29,7 +28,7 @@ class BlindsController {
 
   static getBlinds() {
     debug(`getBlinds`);
-    return blindsDB2.getAllBlindRecords();
+    return blindsDB.getAllBlindRecords();
   }
 
   closeBlind(id){
