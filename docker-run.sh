@@ -1,1 +1,0 @@
-docker run -p 8083:8083 -p 5672:5672 --network=tigernet tigerhome-webapi
